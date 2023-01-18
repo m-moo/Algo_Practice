@@ -10,16 +10,17 @@ public class Main {
         for(int i=0;i<n;i++) {
             char arr[] = br.readLine().toCharArray();
             boolean flag = false;
+            if(arr[0]!=')'){
+                int end = 0;
+                for (int j = 0; j < arr.length; j++) {
+                    if (arr[j] == '(') end++;
+                    else end--;
 
-            int end = 0;
-            for (int j = 0; j < arr.length; j++) {
-                if (arr[j] == '(') end++;
-                else end--;
-                
-                if(end<0) break;
-            }
-            if (end == 0) {
-                flag = true;
+                    if(end<0) break;
+                }
+                if (end == 0) {
+                    flag = true;
+                }
             }
             System.out.println(flag ? "YES" : "NO");
         }
