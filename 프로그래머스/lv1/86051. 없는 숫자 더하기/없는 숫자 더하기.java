@@ -1,14 +1,10 @@
 class Solution {
     public int solution(int[] numbers) {
-        int answer = 0;
-        boolean[] nums = new boolean[10];
+        int answer = 45;
         for(int i=0;i<numbers.length;i++) {
-            nums[numbers[i]] = true;
+            answer-=numbers[i];
         }
-        
-        for(int i=0;i<nums.length;i++) {
-            if(!nums[i]) answer+= i;
-        }
+       
         return answer;
     }
 }
