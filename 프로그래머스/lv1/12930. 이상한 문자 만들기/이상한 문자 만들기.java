@@ -1,25 +1,15 @@
 class Solution {
     public String solution(String s) {
-        String[] words = s.split(" ",-1);
-        
-        StringBuffer sb = new StringBuffer();
-        for(int i=0;i< words.length;i++) {
-            String w = words[i];
-            if(!w.equals("")) {
-                for(int j=0;j<w.length();j++) {
-                    String c = Character.toString(w.charAt(j));
-                    
-                    if(j%2==0) c=c.toUpperCase();
-                    else c=c.toLowerCase();
-                    sb.append(c);
-                }
-                sb.append(" ");
-            }else{
-                sb.append(" ");
-            }
+        char[] cArr = s.toCharArray();
+        int cnt = 0;
+        for(int i=0;i< cArr.length;i++) {
+            char c = cArr[i];
+            if(c!=' ') {
+                cArr[i] = cnt++%2==0?Character.toUpperCase(c)
+                    :Character.toLowerCase(c);
+            }else cnt = 0;
         }
-        sb.deleteCharAt(sb.length()-1);
         
-        return sb.toString();
+        return String.valueOf(cArr);
     }
 }
