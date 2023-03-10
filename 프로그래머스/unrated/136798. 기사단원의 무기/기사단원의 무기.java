@@ -1,19 +1,20 @@
 class Solution {
     public int solution(int number, int limit, int power) {
-        int answer = 1;
+        int answer = 0;
 
-        for(int i=2;i<=number;i++) {
-            int div = getDiv(i);
-            if(div>limit) answer+=power;
-            else answer+=div;
+       int[] count = new int[number+1];
+        
+        for(int i=1;i<=number;i++) {
+            for(int j=1;j<=number/i;j++) {
+                count[i*j]++;
+            }
         }
+        
+        for(int i=1;i<=number;i++) {
+            if(count[i] > limit) answer+=power;
+            else answer+=count[i];
+        }
+        
         return answer;
-    }
-    public int getDiv(int n){
-        int rs = 2;
-        for(int i=2;i<=n/2;i++) {
-            if(n%i==0) rs++;
-        }
-        return rs;
     }
 }
