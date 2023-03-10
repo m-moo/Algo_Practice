@@ -1,50 +1,44 @@
 class Solution {
+    /* 키패드 */
+    int[][] pad = {{3,1},
+            {0,0},{0,1},{0,2},
+            {1,0},{1,1},{1,2},
+            {2,0},{2,1},{2,2}
+    };
+    /* 엄지 위치 */
+    int[] left = {3,0};
+    int[] right = {3,2};
+    String hand;
+    
     public String solution(int[] numbers, String hand) {
+        this.hand = String.valueOf(Character.toUpperCase(hand.charAt(0)));
         StringBuffer answer = new StringBuffer();
-
-        int[][] pad = {{3,1},
-                {0,0},{0,1},{0,2},
-                {1,0},{1,1},{1,2},
-                {2,0},{2,1},{2,2},
-                {3,0},{3,1},{3,2}
-        };
-        int left = 10, right = 12;
-        String curr = "";
 
         for(int i=0;i< numbers.length;i++) {
             int n = numbers[i];
-            switch (n) {
-                case 1: case 4: case 7:
-                    curr = "L";
-                    left = n;
-                    break;
-                case 3: case 6: case 9:
-                    curr = "R";
-                    right = n;
-                    break;
-                default :
-                    int[] target = {pad[n][0],pad[n][1]};
-                    int l = Math.abs(pad[left][0] - target[0])+Math.abs(pad[left][1] - target[1]);
-                    int r = Math.abs(pad[right][0] - target[0])+Math.abs(pad[right][1] - target[1]);
 
-                    if(l > r) {
-                        curr = "R";
-                        right = n;
-                    }else if(l < r){
-                        curr = "L";
-                        left = n;
-                    }else{
-                        if(hand.equals("right")){
-                            curr = "R";
-                            right = n;
-                        }else{
-                            curr = "L";
-                            left = n;
-                        }
-                    }
-            }
-            answer.append(curr);
+            String thumb = pushNumber(n);
+            answer.append(thumb);
+            /* 손가락 위치 옮기기*/
+            if(thumb.equals("R")) right = pad[n];
+            else left = pad[n];
         }
         return answer.toString();
+    }
+    
+    public String pushNumber(int n) {
+        if(n==1 || n==4 || n==7) return "L";
+        if(n==3 || n==6 || n==9) return "R";
+
+        /* 손가락 움직임 계산 */
+        int[] target = {pad[n][0],pad[n][1]};
+        int l = Math.abs(left[0] - target[0])+Math.abs(left[1] - target[1]);
+        int r = Math.abs(right[0] - target[0])+Math.abs(right[1] - target[1]);
+
+        if(l > r)  return "R";
+        else if(l < r) return "L";
+        else{
+            return this.hand;
+        }
     }
 }
