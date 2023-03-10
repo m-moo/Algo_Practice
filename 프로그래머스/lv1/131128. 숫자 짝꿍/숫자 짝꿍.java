@@ -4,18 +4,19 @@ class Solution {
     public String solution(String X, String Y) {
         StringBuffer answer = new StringBuffer();
 
-        char[] x = X.toCharArray();
-        char[] y = Y.toCharArray();
-        Arrays.sort(x);
-        Arrays.sort(y);
-        int lastIdx = y.length-1;
-        for(int i=x.length-1;i>-1;i--) {
-            char c = x[i];
-            for(int j=lastIdx;j>-1;j--) {
-                if(c == y[j]) {
-                    lastIdx = j-1;
-                    answer.append(c);
-                    break;
+        int[] x = new int[10];
+        int[] y = new int[10];
+        for(int i=0;i<X.length();i++) {
+            x[X.charAt(i)-'0']++;
+        }
+        for(int i=0;i<Y.length();i++) {
+            y[Y.charAt(i)-'0']++;
+        }
+
+        for(int i=9;i>-1;i--) {
+            if(x[i] > 0 && y[i] > 0) {
+                for(int j=0;j<Math.min(x[i],y[i]);j++) {
+                    answer.append(i);
                 }
             }
         }
