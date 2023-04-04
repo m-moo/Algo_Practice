@@ -5,13 +5,13 @@ class Solution {
         for(int i=1;i<arr.length;i++) {
             int a  = arr[i-1], b = arr[i];
             if(b%a == 0) arr[i] = b;
-            else arr[i] = a*b/getGCF(a,b);
+            else arr[i] = a*b/gcd(a,b);
         }
         
         return arr[arr.length-1];
     }
     
-    public int getGCF(int a, int b) {
+    public int gcd(int a, int b) {
         int rs = 1;
         int cnt = 2;
         while(cnt <= a/2) {
