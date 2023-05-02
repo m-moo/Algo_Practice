@@ -7,13 +7,9 @@ class Solution {
         
         for(int i=1;i<=len;i++) {
             for(int j=0;j<len;j++) {
-                int tot = 0, idx = j;
-                int cnt = 0;
-                while(cnt < i) {
-                    if(idx == len) idx = 0;
-                    tot += elements[idx];
-                    idx++;
-                    cnt++;
+                int tot = 0;
+                for(int k=j;k<j+i;k++) {
+                    tot += elements[k%len];
                 }
                 set.add(tot);
             }
