@@ -5,38 +5,23 @@ import java.util.regex.Pattern;
 
 class Solution {
     public String[] solution(String[] files) {
-        
+        Pattern p = Pattern.compile("(\\D+)(\\d{1,5})");
+
         Arrays.sort(files, new Comparator<String>() {
             @Override
             public int compare(String o1, String o2) {
-                /* 파일명 head, number, tail 분리 */
-                String[] splitted1 = splitFile(o1);
-                String[] splitted2 = splitFile(o2);
-
-                /* head 비교 */
-                int headCompare = splitted1[0].compareToIgnoreCase(splitted2[0]);
-
-                /* number 비교 */
-                if(headCompare == 0) {
-                    int num1 = Integer.parseInt(splitted1[1]);
-                    int num2 = Integer.parseInt(splitted2[1]);
-
-                    return num1 - num2;
+                Matcher m1 = p.matcher(o1.toLowerCase());
+                Matcher m2 = p.matcher(o2.toLowerCase());
+                m1.find();
+                m2.find();
+                
+                if(m1.group(1).equals(m2.group(1))) {
+                    return Integer.parseInt(m1.group(2)) - Integer.parseInt(m2.group(2));
                 }
-                return headCompare;
+                return m1.group(1).compareTo(m2.group(1));   
             }
         });
         
         return files;
-    }
-    
-    public String[] splitFile(String file) {
-        Pattern pattern = Pattern.compile("(\\D+)(\\d{1,5})(.*)");
-        Matcher matcher = pattern.matcher(file);
-
-        if(matcher.matches())
-            return new String[]{matcher.group(1), matcher.group(2),matcher.group(3)};
-
-        return new String[]{};
     }
 }
