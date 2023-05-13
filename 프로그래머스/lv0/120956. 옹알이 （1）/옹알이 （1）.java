@@ -6,22 +6,12 @@ class Solution {
         int answer = 0;
 
         for(int i=0;i<babbling.length;i++) {
-            boolean[] visited = new boolean[canDo.length];
-            StringBuilder sb = new StringBuilder();
-            int curr = 0;
-            while(curr < babbling[i].length()) {
-                sb.append(babbling[i].charAt(curr));
-                int idx = Arrays.asList(canDo).indexOf(sb.toString());
-                if(idx >= 0){
-                    if(!visited[idx]) {
-                        visited[idx] = true;
-                        sb.delete(0,sb.length());
-                    }
-                    else break;
-                }
-                curr++;
+            String babble = babbling[i];
+            for(int j=0;j<canDo.length;j++) {
+                babble = babble.replace(canDo[j],"0");
             }
-            if(sb.length() == 0) answer++;
+            babble = babble.replaceAll("0","");
+            if(babble.isEmpty()) answer++;
         }
         
         return answer;
