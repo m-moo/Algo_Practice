@@ -1,6 +1,6 @@
 class Solution {
     public String solution(String m, String[] musicinfos) {
-        String answer = "";
+        String answer = "(None)";
 
         // "#"을 처리하는 부분
         m = m.replaceAll("C#", "c").replaceAll("D#", "d").replaceAll("F#", "f").replaceAll("G#", "g").replaceAll("A#", "a");
@@ -27,6 +27,6 @@ class Solution {
                 }
             }
         }
-        return answer.isEmpty()?"(None)":answer;
+        return answer;
     }
 }
