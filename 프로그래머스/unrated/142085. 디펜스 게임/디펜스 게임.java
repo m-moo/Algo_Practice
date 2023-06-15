@@ -8,10 +8,10 @@ class Solution {
 
         PriorityQueue<Integer> pq = new PriorityQueue<>();
 
-        int idx = 0;
-        while(idx < len) {
-            pq.add(enemy[idx++]);
-            if(idx <= k) continue;
+        for(int i=0;i<len;i++) {
+            pq.add(enemy[i]);
+            if(i < k) continue;
+            
             if(n - pq.peek() >= 0) {
                 answer++;
                 n -= pq.poll();
