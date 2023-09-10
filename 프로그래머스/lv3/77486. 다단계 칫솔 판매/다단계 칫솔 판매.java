@@ -1,10 +1,10 @@
 import java.util.HashMap;
 
 class Solution {
-    HashMap<String,String> ref = new HashMap<>();
     HashMap<String,Integer> num = new HashMap<>();
+    HashMap<String,String> ref = new HashMap<>();
     int[] answer;
-    
+
     public int[] solution(String[] enroll, String[] referral, String[] seller, int[] amount) {
         answer = new int[enroll.length];
 
@@ -21,12 +21,10 @@ class Solution {
 
             answer[num.get(s)] += money - refMoney;
             String refSeller = ref.get(s);
-            giveRefMoney(ref.get(s), refMoney);
+            giveRefMoney(refSeller, refMoney);
         }
-        
         return answer;
     }
-    
     public void giveRefMoney(String s, int mon) {
         if(!s.equals("-")){
             int refMoney = mon/10;
